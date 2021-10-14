@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc
 from datetime import datetime
+
 
 
 db = SQLAlchemy()
@@ -18,3 +18,15 @@ class Message(db.Model):
     #To print out when we send a new message for testing
     def __repr__(self):
         return "Message: " + str(self.message)
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'sender': self.sender,
+            'reciever': self.reciever,
+            'message': self.message,
+            'subject': self.subject,
+            'creation_date': self.creation_date,
+            'read': self.read
+        }
+

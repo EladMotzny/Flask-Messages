@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc
-from datetime import datetime
+from flask_marshmallow import Marshmallow
 from models import Message, db
 import os.path
 
@@ -13,14 +12,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///messages.db'
 db.init_app(app)
 
+
 #initialize the db if it doesnt exist
 if not os.path.isfile('messages.db'):
     with app.app_context():
         db.create_all()
-
-@app.route('/')
-def index():
-    return render_template('index.html') 
 
 
 #WRITE MESSAGE TO A SPECIFIC PERSON(POST)
@@ -41,15 +37,20 @@ def send_message(reciever):
 #GET ALL MESSAGES FOR SPECIFIC USER (GET)
 @app.route('/messages/<string:user>', methods=['GET'])
 def get_messages(user):
-    pass
+    all_messages = Message.query.filter_by(reciever = user).all()
+    return jsonify([e.serialize() for e in all_messages])
+
 
 #GET ALL UNREAD MESSAGES FOR A SPECIFIC USER (ANOTHER MODEL? OR TO ADD ANOTHER VARIABLE (BOOLEAN) TO CURRENT MODEL OF READ MESSAGE AND FILTER BY RECIEVER AND READ )
 @app.route('/unread/<string:user>', methods=['GET'])
 def get_unread_messages(user):
-    pass
+    messages = Message.query.all()
+    print(jsonify(messages))
+    return jsonify(messages)
+
+
 
 #READ MESSAGE (GET)
-#WORKING
 #ADD TRY/EXCEPT?
 @app.route('/read/<int:id>', methods=['GET'])
 def read_message(id):
@@ -60,7 +61,6 @@ def read_message(id):
 
 
 #DELETE MESSAGE (DEL)
-#WORKING
 @app.route('/delete/<int:id>', methods=['DELETE'])
 def delete_message(id):
     message = Message.query.get_or_404(id)
