@@ -6,6 +6,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender = db.Column(db.String(100), nullable=False)
@@ -19,6 +20,7 @@ class Message(db.Model):
     def __repr__(self):
         return "Message: " + str(self.message)
 
+    #Serializer function to return to the user
     def serialize(self):
         return {
             'id': self.id,

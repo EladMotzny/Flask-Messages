@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from models import Message, db
 import os.path
 
@@ -19,53 +18,72 @@ if not os.path.isfile('messages.db'):
         db.create_all()
 
 
-#WRITE MESSAGE TO A SPECIFIC PERSON(POST)
-#NEED TRY/EXCEPT
+#Send a message to someone.
+#Example: localhost:5000/send/Shlomi
 @app.route('/send/<string:reciever>', methods=['POST'])
 def send_message(reciever):
-    data = request.get_json()
-    new_message = Message(sender = data['sender'], 
+    try:
+        data = request.get_json()
+        new_message = Message(sender = data['sender'], 
                             reciever=reciever, 
                             message = data['message'],
                             subject = data['subject'])
-    db.session.add(new_message)
-    db.session.flush()
-    db.session.commit()
-    return "Message: "+data['message']+" was sent to: " +reciever+ " and has the id: " + str(new_message.id)
+        db.session.add(new_message)
+        db.session.flush()
+        db.session.commit()
+        return "Message: "+data['message']+" was sent to: " +reciever+ " and has the id: " + str(new_message.id)
+    except Exception as e:
+        return jsonify({'Exception': True, 'Error:': str(e) + " Was not found"})
 
-
-#GET ALL MESSAGES FOR SPECIFIC USER (GET)
+#Get all messages for user
+#Example: localhost:5000/messages/Shlomi
 @app.route('/messages/<string:user>', methods=['GET'])
 def get_messages(user):
-    all_messages = Message.query.filter_by(reciever = user).all()
-    return jsonify([e.serialize() for e in all_messages])
+    try:
+        all_messages = Message.query.filter_by(reciever = user).all()
+        if all_messages is None:
+            return "There are no messages for " + user
+        return jsonify([e.serialize() for e in all_messages])
+    except Exception as e:
+        return jsonify({'Exception': True, 'Error:': str(e)})
 
-
-#GET ALL UNREAD MESSAGES FOR A SPECIFIC USER (ANOTHER MODEL? OR TO ADD ANOTHER VARIABLE (BOOLEAN) TO CURRENT MODEL OF READ MESSAGE AND FILTER BY RECIEVER AND READ )
+#Get all unread messages for user
+#Example: localhost:5000/unread/Shlomi
 @app.route('/unread/<string:user>', methods=['GET'])
 def get_unread_messages(user):
-    all_messages = Message.query.filter_by(reciever = user, read = False).all()
-    return jsonify([e.serialize() for e in all_messages])
+    try:
+        all_messages = Message.query.filter_by(reciever = user, read = False).all()
+        if all_messages is None:
+            return "There are no messages for " + user
+        return jsonify([e.serialize() for e in all_messages])
+    except Exception as e:
+        return jsonify({'Exception': True, 'Error:': str(e)})
 
 
-
-#READ MESSAGE (GET)
-#ADD TRY/EXCEPT?
+#Read a specific message using the ID for that message
+#Example: localhost:5000/read/1
 @app.route('/read/<int:id>', methods=['GET'])
 def read_message(id):
-    message = Message.query.get_or_404(id)
-    message.read = True
-    db.session.commit()
-    return "Message: " + message.message + " was marked as read: " + str(message.read)
+    try:
+        message = Message.query.get_or_404(id)
+        message.read = True
+        db.session.commit()
+        return "Message: " + message.message + " was marked as read"
+    except Exception as e:
+        return jsonify({'Exception': True, 'Error:': str(e)})
 
 
-#DELETE MESSAGE (DEL)
+#Delete a message using the ID for that message
+#Example: localhost:5000/delete/1
 @app.route('/delete/<int:id>', methods=['DELETE'])
 def delete_message(id):
-    message = Message.query.get_or_404(id)
-    db.session.delete(message)
-    db.session.commit()
-    return "Message was deleted"
+    try:
+        message = Message.query.get_or_404(id)
+        db.session.delete(message)
+        db.session.commit()
+        return "Message was deleted"
+    except Exception as e:
+        return jsonify({'Exception': True, 'Error:': str(e)})
 
 
 
