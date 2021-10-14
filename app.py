@@ -18,6 +18,10 @@ if not os.path.isfile('messages.db'):
         db.create_all()
 
 
+@app.route('/')
+def index():
+    return "<h1> Please use postman to test the app </h1>"
+
 #Send a message to someone.
 #Example: localhost:5000/send/Shlomi
 @app.route('/send/<string:reciever>', methods=['POST'])

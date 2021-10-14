@@ -23,12 +23,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/messages/first",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/messages/first",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"messages",
 						"first"
@@ -43,12 +44,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/messages/NonExistingUser",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/messages/NonExistingUser",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"messages",
 						"NonExistingUser"
@@ -72,12 +74,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/send/Elad",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/send/Elad",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"send",
 						"Elad"
@@ -101,12 +104,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/send/Elad",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/send/Elad",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"send",
 						"Elad"
@@ -130,12 +134,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/send/Elad",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/send/Elad",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"send",
 						"Elad"
@@ -159,12 +164,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/send/Elad",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/send/Elad",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"send",
 						"Elad"
@@ -179,12 +185,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/read/7",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/read/7",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"read",
 						"7"
@@ -206,12 +213,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:5000/unread/Elad",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/unread/Elad",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"unread",
 						"Elad"
@@ -226,12 +234,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/delete/6",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/delete/6",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"delete",
 						"6"
@@ -246,12 +255,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/delete/5",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/delete/5",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"delete",
 						"5"
@@ -266,12 +276,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/delete/7",
-					"protocol": "http",
+					"raw": "https://flask-message-api.herokuapp.com/delete/7",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"flask-message-api",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"delete",
 						"7"
