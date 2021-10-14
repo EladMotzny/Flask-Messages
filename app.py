@@ -44,9 +44,8 @@ def get_messages(user):
 #GET ALL UNREAD MESSAGES FOR A SPECIFIC USER (ANOTHER MODEL? OR TO ADD ANOTHER VARIABLE (BOOLEAN) TO CURRENT MODEL OF READ MESSAGE AND FILTER BY RECIEVER AND READ )
 @app.route('/unread/<string:user>', methods=['GET'])
 def get_unread_messages(user):
-    messages = Message.query.all()
-    print(jsonify(messages))
-    return jsonify(messages)
+    all_messages = Message.query.filter_by(reciever = user, read = False).all()
+    return jsonify([e.serialize() for e in all_messages])
 
 
 
